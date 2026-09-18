@@ -161,7 +161,7 @@
             margin-bottom: 30px;
         }
 
-        .text-input-group textarea, .text-input-group input {
+        .text-input-group input {
             width: 100%;
             padding: 16px;
             border: 2px solid #ebdccc;
@@ -169,12 +169,11 @@
             font-size: 1rem;
             background-color: #faf6f0;
             color: var(--text-main);
-            resize: vertical;
             outline: none;
             transition: var(--transition);
         }
 
-        .text-input-group textarea:focus, .text-input-group input:focus {
+        .text-input-group input:focus {
             border-color: var(--primary);
             background-color: #fff;
         }
@@ -303,423 +302,160 @@
 
     <header>
         <h1>English Grammar Master</h1>
-        <p>Интерактивный тренажер: 45 продвинутых заданий на основе учебных презентаций</p>
+        <p>Интерактивный тренажер: 45 продвинутых заданий с защищенной валидацией</p>
     </header>
 
     <div class="container" id="quiz-app">
-        <!-- Контент квиза будет динамически генерироваться через JS -->
+        <!-- Контент квиза генерируется динамически -->
     </div>
 
     <footer>
-        <p>&copy; 2026 Граматический Квиз-Проджект. Спокойный пастельный стиль Latte & Soft Cream.</p>
+        <p>&copy; 2026 Граматический Квиз-Проджект. Дизайн: Latte & Soft Cream.</p>
     </footer>
 
     <script>
-        // Полная база данных из 45 вопросов на основе прикрепленных презентаций
+        // База данных из 45 вопросов (включая текстовые с эталонами валидации)
         const questionsData = [
-            // --- Блок 1: Future Tenses (Will, Shall, Going to) (Вопросы 1 - 8) ---
-            {
-                block: "Future Tenses",
-                type: "choice",
-                question: "1. Oh, I left the front door wide open! I ... go and shut it right now.",
-                options: ["'ll", "am going to", "shall", "go"],
-                answer: 0,
-                explanation: "Мы используем 'will ('ll)' для спонтанных решений, принятых в момент речи."
-            },
-            {
-                block: "Future Tenses",
-                type: "choice",
-                question: "2. Look at those heavy black clouds in the sky! It ... rain very soon.",
-                options: ["will", "is going to", "shall", "is raining"],
-                answer: 1,
-                explanation: "Когда ситуация сейчас (черные тучи) явно указывает на то, что произойдет в будущем, используется конструкция be going to."
-            },
-            {
-                block: "Future Tenses",
-                type: "choice",
-                question: "3. 'Where shall we have our lunch today?' — 'Let's go to Marino's.' Выберите правильную модальную форму для предложения с вопросом-предложением:",
-                options: ["Will we", "Shall we", "Do we", "Are we going to"],
-                answer: 1,
-                explanation: "Shall используется в вопросах (Shall I...? / Shall we...?) чтобы спросить совета или предложить идею."
-            },
-            {
-                block: "Future Tenses",
-                type: "choice",
-                question: "4. My flight to Paris ... next Monday at 8:00 AM (по расписанию). Какой вариант верлен?",
-                options: ["will leave", "is leaving", "leaves", "is going to leave"],
-                answer: 2,
-                explanation: "Для расписаний, графиков и программ (timetable) в будущем используется Present Simple."
-            },
-            {
-                block: "Future Tenses",
-                type: "choice",
-                question: "5. I'm meeting Kate tomorrow morning at 10:30 (договоренность заранее). Почему используется Present Continuous?",
-                options: [
-                    "Потому что это спонтанное решение",
-                    "Потому что это личная договоренность / запланированное расписание",
-                    "Потому что это прогноз погоды",
-                    "Потому что это расписание поездов"
-                ],
-                answer: 1,
-                explanation: "Present Continuous (I am doing) используется для личных договоренностей и планов, о которых уже договорились."
-            },
-            {
-                block: "Future Tenses",
-                type: "choice",
-                question: "6. I hope Kate ... the driving test tomorrow. Выберите правильную форму после глагола hope:",
-                options: ["passes", "will pass", "is going to pass", "passed"],
-                answer: 0,
-                explanation: "После конструкции I hope мы обычно используем Present Simple (I hope Kate passes...)."
-            },
-            {
-                block: "Future Tenses",
-                type: "choice",
-                question: "7. The car ... start. (= машина «отказывается» заводиться). Какой глагол нужен?",
-                options: ["won't", "shan't", "doesn't", "isn't going to"],
-                answer: 0,
-                explanation: "Won't используется в значении отказа механизма или человека выполнять действие."
-            },
-            {
-                block: "Future Tenses",
-                type: "choice",
-                question: "8. Don't phone Amy right now. She ... busy (прямо сейчас в будущем/моменте).",
-                options: ["will be", "is being", "is", "shall be"],
-                answer: 0,
-                explanation: "Мы часто используем will ('ll) для прогноза или положения дел в данный момент (She'll be busy now)."
-            },
+            // Блок 1: Future Tenses (1-8)
+            { block: "Future Tenses", type: "choice", question: "1. Oh, I left the front door wide open! I ... go and shut it right now.", options: ["'ll", "am going to", "shall", "go"], answer: 0, explanation: "Мы используем 'will ('ll)' для спонтанных решений." },
+            { block: "Future Tenses", type: "choice", question: "2. Look at those heavy black clouds in the sky! It ... rain very soon.", options: ["will", "is going to", "shall", "is raining"], answer: 1, explanation: "Когда ситуация сейчас явно указывает на будущее, используется be going to." },
+            { block: "Future Tenses", type: "choice", question: "3. 'Where shall we have our lunch today?' — 'Let's go to Marino's.' Выберите правильную форму:", options: ["Will we", "Shall we", "Do we", "Are we going to"], answer: 1, explanation: "Shall используется в вопросах для предложений и советов." },
+            { block: "Future Tenses", type: "choice", question: "4. My flight to Paris ... next Monday at 8:00 AM (по расписанию).", options: ["will leave", "is leaving", "leaves", "is going to leave"], answer: 2, explanation: "Для расписаний и графиков используется Present Simple." },
+            { block: "Future Tenses", type: "choice", question: "5. I'm meeting Kate tomorrow morning at 10:30 (договоренность заранее).", options: ["Спонтанное решение", "Личная договоренность / запланированный план", "Прогноз погоды", "Расписание поездов"], answer: 1, explanation: "Present Continuous используется для личных договоренностей." },
+            { block: "Future Tenses", type: "choice", question: "6. I hope Kate ... the driving test tomorrow.", options: ["passes", "will pass", "is going to pass", "passed"], answer: 0, explanation: "После глагола hope мы используем Present Simple." },
+            { block: "Future Tenses", type: "choice", question: "7. The car ... start. (= машина «отказывается» заводиться).", options: ["won't", "shan't", "doesn't", "isn't going to"], answer: 0, explanation: "Won't выражает отказ механизма или объекта." },
+            { block: "Future Tenses", type: "choice", question: "8. Don't phone Amy right now. She ... busy (прогноз на текущий момент).", options: ["will be", "is being", "is", "shall be"], answer: 0, explanation: "Will ('ll) используется для логического предположения о настоящем." },
 
-            // --- Блок 2: Future Continuous & Future Perfect (Вопросы 9 - 14) ---
-            {
-                block: "Future Continuous & Perfect",
-                type: "choice",
-                question: "9. This time next week I ... on a beach, lying under the sun.",
-                options: ["will lie", "will be lying", "will have lain", "am lying"],
-                answer: 1,
-                explanation: "Future Continuous (will be doing) описывает действие, которое будет в процессе в определенный момент в будущем."
-            },
-            {
-                block: "Future Continuous & Perfect",
-                type: "choice",
-                question: "10. Don't phone between 7 and 8 PM. We ... dinner at that time.",
-                options: ["will eat", "will be eating", "eat", "are eating"],
-                answer: 1,
-                explanation: "Действие в процессе в конкретный промежуток времени в будущем требует Future Continuous."
-            },
-            {
-                block: "Future Continuous & Perfect",
-                type: "choice",
-                question: "11. Sally always leaves for work at 8:30. At 9:00 she won't be at home — she ... to work.",
-                options: ["will go", "will be going", "will have gone", "goes"],
-                answer: 2,
-                explanation: "Future Perfect (will have done) показывает, что действие завершится до определенного момента в будущем."
-            },
-            {
-                block: "Future Continuous & Perfect",
-                type: "choice",
-                question: "12. Next year Ted and Amy ... married for 25 years.",
-                options: ["will be", "will have been", "have been", "had been"],
-                answer: 1,
-                explanation: "Для длительных состояний, завершающихся к моменту в будущем, используется Future Perfect."
-            },
-            {
-                block: "Future Continuous & Perfect",
-                type: "choice",
-                question: "13. By the time we arrive at the cinema, the film already ...",
-                options: ["will start", "will be starting", "will have started", "starts"],
-                answer: 2,
-                explanation: "Future Perfect используется с предлогом by the time для действий, завершившихся до рубежа в будущем."
-            },
-            {
-                block: "Future Continuous & Perfect",
-                type: "choice",
-                question: "14. 'Later in the programme, I ... talking to the Minister of Education.' Какой вариант используют ведущие ТВ?",
-                options: ["will be", "will", "am going to", "shall"],
-                answer: 0,
-                explanation: "Will be -ing часто используется для анонсирования запланированных ходов в рамках программы или шоу."
-            },
+            // Блок 2: Future Continuous & Perfect (9-14)
+            { block: "Future Continuous & Perfect", type: "choice", question: "9. This time next week I ... on a beach, lying under the sun.", options: ["will lie", "will be lying", "will have lain", "am lying"], answer: 1, explanation: "Future Continuous описывает процесс в определенный момент в будущем." },
+            { block: "Future Continuous & Perfect", type: "choice", question: "10. Don't phone between 7 and 8 PM. We ... dinner at that time.", options: ["will eat", "will be eating", "eat", "are eating"], answer: 1, explanation: "Действие в процессе в конкретный промежуток будущего времени." },
+            { block: "Future Continuous & Perfect", type: "choice", question: "11. Sally always leaves for work at 8:30. At 9:00 she won't be at home — she ... to work.", options: ["will go", "will be going", "will have gone", "goes"], answer: 2, explanation: "Future Perfect показывает завершенность действия к моменту в будущем." },
+            { block: "Future Continuous & Perfect", type: "choice", question: "12. Next year Ted and Amy ... married for 25 years.", options: ["will be", "will have been", "have been", "had been"], answer: 1, explanation: "Для длительных состояний к рубежу в будущем используется Future Perfect." },
+            { block: "Future Continuous & Perfect", type: "choice", question: "13. By the time we arrive at the cinema, the film already ...", options: ["will start", "will be starting", "will have started", "starts"], answer: 2, explanation: "Future Perfect употребляется с by the time для завершенных к сроку действий." },
+            { block: "Future Continuous & Perfect", type: "choice", question: "14. 'Later in the programme, I ... talking to the Minister of Education.'", options: ["will be", "will", "am going to", "shall"], answer: 0, explanation: "Will be -ing часто используется ведущими для анонса пунктов программы." },
 
-            // --- Блок 3: Past Continuous (Обязательный блок) (Вопросы 15 - 22) ---
-            {
-                block: "Past Continuous",
-                type: "choice",
-                question: "15. Yesterday at 10:30 AM, Karen and Joe ... tennis.",
-                options: ["played", "were playing", "was playing", "had played"],
-                answer: 1,
-                explanation: "Past Continuous (was/were + V-ing) используется для действий, находившихся в процессе в определенный момент в прошлом."
-            },
-            {
-                block: "Past Continuous",
-                type: "choice",
-                question: "16. Выберите правильное отрицание в Past Continuous для множественного числа:",
-                options: ["they weren't working", "they didn't working", "they hadn't working", "they weren't worked"],
-                answer: 0,
-                explanation: "Формула отрицания в Past Continuous: subject + weren't (were not) + V-ing."
-            },
-            {
-                block: "Past Continuous",
-                type: "choice",
-                question: "17. What ... you ... at 10 o'clock last night?",
-                options: ["did / do", "were / doing", "was / doing", "had / done"],
-                answer: 1,
-                explanation: "Вопрос в Past Continuous строится через: Were + subject + V-ing?"
-            },
-            {
-                block: "Past Continuous",
-                type: "choice",
-                question: "18. Найдите разницу: 'We were walking home when I met Dan' означает:",
-                options: [
-                    "Мы полностью завершили путь, а потом встретили Дэна",
-                    "Мы были в процессе ходьбы домой, когда встретили Дэна (короткое действие прервало процесс)",
-                    "Дэн шел с нами всю дорогу",
-                    "Это предложение грамматически неверно"
-                ],
-                answer: 1,
-                explanation: "Past Continuous обозначает фоновое длинное действие, прерванное кратким действием в Past Simple."
-            },
-            {
-                block: "Past Continuous",
-                type: "choice",
-                question: "19. Какой глагол НЕЛЬЗЯ использовать в Past Continuous (и других continuous-формах)?",
-                options: ["study", "know", "run", "play"],
-                answer: 1,
-                explanation: "Глаголы состояния (stative verbs), такие как know, want, like, не употребляются в Continuous."
-            },
-            {
-                block: "Past Continuous",
-                type: "choice",
-                question: "20. Matt phoned while we ... dinner.",
-                options: ["had", "were having", "had been having", "have had"],
-                answer: 1,
-                explanation: "Короткий звонок (Past Simple) произошел посреди процесса ужина (Past Continuous)."
-            },
-            {
-                block: "Past Continuous",
-                type: "choice",
-                question: "21. Выберите правильный вариант с Past Simple (завершенное действие вместо процесса): 'We ... home after the party last night.'",
-                options: ["were walking", "walked", "had walked", "walk"],
-                answer: 1,
-                explanation: "Past Simple используется для полного, завершенного действия от начала до конца (walked home)."
-            },
-            {
-                block: "Past Continuous",
-                type: "choice",
-                question: "22. I waved to Helen, but she ... looking.",
-                options: ["wasn't", "weren't", "didn't", "hadn't"],
-                answer: 0,
-                explanation: "С местоимением she в Past Continuous отрицание строится как wasn't + V-ing."
-            },
+            // Блок 3: Past Continuous (15-22)
+            { block: "Past Continuous", type: "choice", question: "15. Yesterday at 10:30 AM, Karen and Joe ... tennis.", options: ["played", "were playing", "was playing", "had played"], answer: 1, explanation: "Past Continuous — процесс в определенный момент прошлого." },
+            { block: "Past Continuous", type: "choice", question: "16. Выберите правильное отрицание в Past Continuous для множественного числа:", options: ["they weren't working", "they didn't working", "they hadn't working", "they weren't worked"], answer: 0, explanation: "Формула: weren't + V-ing." },
+            { block: "Past Continuous", type: "choice", question: "17. What ... you ... at 10 o'clock last night?", options: ["did / do", "were / doing", "was / doing", "had / done"], answer: 1, explanation: "Вопрос в Past Continuous: Were + подлежащее + V-ing." },
+            { block: "Past Continuous", type: "choice", question: "18. 'We were walking home when I met Dan' означает:", options: ["Путь полностью завершен", "Процесс ходьбы прерван кратким действием", "Дэн шел с нами", "Ошибка в грамматике"], answer: 1, explanation: "Фоновый процесс прерывается коротким действием в Past Simple." },
+            { block: "Past Continuous", type: "choice", question: "19. Какой глагол НЕЛЬЗЯ использовать в Continuous?", options: ["study", "know", "run", "play"], answer: 1, explanation: "Know — стативный глагол (состояния), не используется в Continuous." },
+            { block: "Past Continuous", type: "choice", question: "20. Matt phoned while we ... dinner.", options: ["had", "were having", "had been having", "have had"], answer: 1, explanation: "Звонок (Past Simple) прервал процесс ужина (Past Continuous)." },
+            { block: "Past Continuous", type: "choice", question: "21. 'We ... home after the party last night.' (Завершенный путь до конца)", options: ["were walking", "walked", "had walked", "walk"], answer: 1, explanation: "Полное завершенное действие выражается через Past Simple." },
+            { block: "Past Continuous", type: "choice", question: "22. I waved to Helen, but she ... looking.", options: ["wasn't", "weren't", "didn't", "hadn't"], answer: 0, explanation: "С местоимением she в Past Continuous отрицание — wasn't." },
 
-            // --- Блок 4: Past Perfect & Past Perfect Continuous (Вопросы 23 - 30) ---
-            {
-                block: "Past Perfect & Continuous",
-                type: "choice",
-                question: "23. When Sarah arrived at the party, Paul wasn't there. He ... home.",
-                options: ["went", "has gone", "had already gone", "was going"],
-                answer: 2,
-                explanation: "Если одно действие в прошлом произошло раньше другого действия в прошлом, используется Past Perfect (had gone)."
-            },
-            {
-                block: "Past Perfect & Continuous",
-                type: "choice",
-                question: "24. Как образуется утвердительное предложение в Past Perfect Continuous?",
-                options: ["Subject + had + V3", "Subject + had been + V-ing", "Subject + was/were + V-ing", "Subject + have been + V-ing"],
-                answer: 1,
-                explanation: "Формула Past Perfect Continuous: Subject + had been + V-ing."
-            },
-            {
-                block: "Past Perfect & Continuous",
-                type: "choice",
-                question: "25. She was very tired because she ... a marathon all morning.",
-                options: ["ran", "has run", "had been running", "was running"],
-                answer: 2,
-                explanation: "Past Perfect Continuous подчеркивает длительность процесса, который длился до определенного момента в прошлом и имел результат (усталость)."
-            },
-            {
-                block: "Past Perfect & Continuous",
-                type: "choice",
-                question: "26. When we got home last night, we found that somebody ... into the flat.",
-                options: ["broke", "had broken", "was breaking", "has broken"],
-                answer: 1,
-                explanation: "Взломали квартиру до того, как мы пришли, поэтому нужен Past Perfect."
-            },
-            {
-                block: "Past Perfect & Continuous",
-                type: "choice",
-                question: "27. He ... for the exam for hours before the phone rang.",
-                options: ["had been studying", "studied", "was studying", "has studied"],
-                answer: 0,
-                explanation: "Указание на длительность действия перед другим событием в прошлом требует Past Perfect Continuous."
-            },
-            {
-                block: "Past Perfect & Continuous",
-                type: "choice",
-                question: "28. The people sitting next to me on the plane were nervous. They ... never before.",
-                options: ["didn't fly", "haven't flown", "hadn't flown", "weren't flying"],
-                answer: 2,
-                explanation: "Опыт до полета выражается через Past Perfect (hadn't flown)."
-            },
-            {
-                block: "Past Perfect & Continuous",
-                type: "choice",
-                question: "29. Next year Ted and Amy will have been married for 25 years. А в Past Perfect эта ситуация звучала бы как:",
-                options: [
-                    "They had been married for 24 years.",
-                    "They have been married.",
-                    "They were married.",
-                    "They are married."
-                ],
-                answer: 0,
-                explanation: "В презентациях приводится пример сопоставления времен: Next year they will have been... / When their son was born, they had been married..."
-            },
-            {
-                block: "Past Perfect & Continuous",
-                type: "choice",
-                question: "30. Найдите ошибку в предложении: 'Yesterday, Sarah was tired because she ran a marathon. She had been running for hours...' Исправьте первое предложение на:",
-                options: [
-                    "she had run a marathon",
-                    "she is running",
-                    "she runs",
-                    "she was running"
-                ],
-                answer: 0,
-                explanation: "В упражнении из презентации 'Spot the mistake' указано, что завершенный факт до другого момента в прошлом передается через Past Perfect (had run)."
-            },
+            // Блок 4: Past Perfect & Continuous (23-30)
+            { block: "Past Perfect & Continuous", type: "choice", question: "23. When Sarah arrived at the party, Paul wasn't there. He ... home.", options: ["went", "has gone", "had already gone", "was going"], answer: 2, explanation: "Действие раньше другого прошлого момента требует Past Perfect." },
+            { block: "Past Perfect & Continuous", type: "choice", question: "24. Формула Past Perfect Continuous:", options: ["Subject + had + V3", "Subject + had been + V-ing", "Subject + was/were + V-ing", "Subject + have been + V-ing"], answer: 1, explanation: "Subject + had been + V-ing." },
+            { block: "Past Perfect & Continuous", type: "choice", question: "25. She was very tired because she ... a marathon all morning.", options: ["ran", "has run", "had been running", "was running"], answer: 2, explanation: "Длительный процесс перед прошлым моментом с видимым результатом." },
+            { block: "Past Perfect & Continuous", type: "choice", question: "26. When we got home last night, we found that somebody ... into the flat.", options: ["broke", "had broken", "was breaking", "has broken"], answer: 1, explanation: "Взломали квартиру раньше нашего прихода — Past Perfect." },
+            { block: "Past Perfect & Continuous", type: "choice", question: "27. He ... for the exam for hours before the phone rang.", options: ["had been studying", "studied", "was studying", "has studied"], answer: 0, explanation: "Длительность действия до события в прошлом." },
+            { block: "Past Perfect & Continuous", type: "choice", question: "28. The people sitting next to me on the plane were nervous. They ... never before.", options: ["didn't fly", "haven't flown", "hadn't flown", "weren't flying"], answer: 2, explanation: "Опыт до полета в прошлом — Past Perfect." },
+            { block: "Past Perfect & Continuous", type: "choice", question: "29. Next year Ted and Amy will have been married... А в Past Perfect:", options: ["They had been married for 24 years.", "They have been married.", "They were married.", "They are married."], answer: 0, explanation: "Сопоставление времен из презентации." },
+            { block: "Past Perfect & Continuous", type: "choice", question: "30. Исправьте ошибку в 'Yesterday, Sarah was tired because she ran a marathon.' Замените ran на:", options: ["she had run a marathon", "she is running", "she runs", "she was running"], answer: 0, explanation: "Факт, совершенный до другого прошлого момента — Past Perfect (had run)." },
 
-            // --- Блок 5: Present Perfect & Present Perfect Continuous (Вопросы 31 - 37) ---
-            {
-                block: "Present Perfect & Continuous",
-                type: "choice",
-                question: "31. Tom can't find his key. He ... his key.",
-                options: ["lost", "has lost", "had lost", "is losing"],
-                answer: 1,
-                explanation: "Действие произошло в прошлом, но имеет прямую связь с настоящим (он все еще без ключа) — Present Perfect."
-            },
-            {
-                block: "Present Perfect & Continuous",
-                type: "choice",
-                question: "32. Почему у тебя одышку? Выбери правильный вопрос в Present Perfect Continuous:",
-                options: ["What did you do?", "What have you been doing?", "What do you do?", "What were you doing?"],
-                answer: 1,
-                explanation: "Для только что прекратившегося действия с видимым результатом в настоящем используется Present Perfect Continuous."
-            },
-            {
-                block: "Present Perfect & Continuous",
-                type: "choice",
-                question: "33. Compare: 'I've been painting my bedroom' (1) и 'I've painted my bedroom' (2). Какое предложение означает, что ремонт полностью завершен?",
-                options: ["Только 1", "Только 2", "Оба", "Ни одно"],
-                answer: 1,
-                explanation: "Present Perfect Simple (I've painted) говорит о завершенном результате, а Continuous (I've been painting) — о процессе."
-            },
-            {
-                block: "Present Perfect & Continuous",
-                type: "choice",
-                question: "34. Какое слово в американском английском часто заменяет британский Present Perfect ('I have just had lunch')?",
-                options: ["Past Simple ('I just had lunch')", "Past Continuous", "Past Perfect", "Future Simple"],
-                answer: 0,
-                explanation: "В American English с наречиями just, already, yet часто используется Past Simple вместо Present Perfect."
-            },
-            {
-                block: "Present Perfect & Continuous",
-                type: "choice",
-                question: "35. It's the first time I ... a car. (Это первый раз, когда я вожу машину). Какое время нужно?",
-                options: ["drive", "drove", "have driven", "had driven"],
-                answer: 2,
-                explanation: "В структуре 'It's the first time someone has done something' используется Present Perfect."
-            },
-            {
-                block: "Present Perfect & Continuous",
-                type: "choice",
-                question: "36. We ... waiting for the bus for over an hour now!",
-                options: ["have been", "had been", "are", "were"],
-                answer: 0,
-                explanation: "Для действия, которое началось в прошлом и продолжается в настоящем (с предлогами for/since), используется Present Perfect Continuous."
-            },
-            {
-                block: "Present Perfect & Continuous",
-                type: "choice",
-                question: "37. How long ... you ... English?",
-                options: ["do / learn", "have / been learning", "did / learn", "are / learning"],
-                answer: 1,
-                explanation: "Вопрос о длительности незаконченного процесса задается в Present Perfect Continuous."
-            },
+            // Блок 5: Present Perfect & Continuous (31-37)
+            { block: "Present Perfect & Continuous", type: "choice", question: "31. Tom can't find his key. He ... his key.", options: ["lost", "has lost", "had lost", "is losing"], answer: 1, explanation: "Прошлое действие с результатом в настоящем — Present Perfect." },
+            { block: "Present Perfect & Continuous", type: "choice", question: "32. Почему у тебя одышка? Выберите вопрос:", options: ["What did you do?", "What have you been doing?", "What do you do?", "What were you doing?"], answer: 1, explanation: "Только что завершившийся процесс с результатом сейчас." },
+            { block: "Present Perfect & Continuous", type: "choice", question: "33. 'I've been painting my bedroom' (1) и 'I've painted my bedroom' (2). Какое предложение означает полностью завершенный ремонт?", options: ["Только 1", "Только 2", "Оба", "Ни одно"], answer: 1, explanation: "Simple (I've painted) говорит о готовом результате." },
+            { block: "Present Perfect & Continuous", type: "choice", question: "34. Какое время в американском английском часто заменяет британский Present Perfect ('I have just had lunch')?", options: ["Past Simple ('I just had lunch')", "Past Continuous", "Past Perfect", "Future Simple"], answer: 0, explanation: "В US English часто используется Past Simple с just/already/yet." },
+            { block: "Present Perfect & Continuous", type: "choice", question: "35. It's the first time I ... a car.", options: ["drive", "drove", "have driven", "had driven"], answer: 2, explanation: "Структура 'It's the first time someone has done' требует Present Perfect." },
+            { block: "Present Perfect & Continuous", type: "choice", question: "36. We ... waiting for the bus for over an hour now!", options: ["have been", "had been", "are", "were"], answer: 0, explanation: "Действие с прошлого продолжается сейчас — Present Perfect Continuous." },
+            { block: "Present Perfect & Continuous", type: "choice", question: "37. How long ... you ... English?", options: ["do / learn", "have / been learning", "did / learn", "are / learning"], answer: 1, explanation: "Вопрос о непрекращающемся процессе длительности." },
 
-            // --- Блок 6: Writing / Translation (Письменный перевод) (Вопросы 38 - 41) ---
-            {
-                block: "Writing & Translation",
-                type: "text",
-                question: "38. Переведите на английский (используя Past Continuous): «Когда зазвонил телефон, мы ужинали». (Напишите фразу целиком на английском)",
+            // Блок 6: Writing / Translation (Письменный перевод) (38-41)
+            { 
+                block: "Writing & Translation", 
+                type: "text", 
+                question: "38. Переведите на английский (Past Continuous): «Когда зазвонил телефон, мы ужинали».", 
                 correctAnswers: [
-                    "we were having dinner when the phone rang",
+                    "we were having dinner when the phone rang", 
                     "when the phone rang we were having dinner",
-                    "we were having dinner when the phone rang.",
                     "we were having dinner when the telephone rang"
-                ],
-                explanation: "Правильный шаблон: We were having dinner when the phone rang."
+                ], 
+                explanation: "Правильный шаблон: We were having dinner when the phone rang." 
             },
-            {
-                block: "Writing & Translation",
-                type: "text",
-                question: "39. Переведите на английский (Future Simple / Спонтанное решение): «Здесь так холодно. Я закрою окно». (Напишите: I'll...)",
+            { 
+                block: "Writing & Translation", 
+                type: "text", 
+                question: "39. Переведите на английский (Future Simple / Спонтанное решение): «Здесь так холодно. Я закрою окно».", 
                 correctAnswers: [
-                    "i'll close the window",
-                    "i will close the window",
-                    "i'll shut the window",
+                    "i'll close the window", 
+                    "i will close the window", 
+                    "i'll shut the window", 
                     "i will shut the window"
-                ],
-                explanation: "Спонтанное решение выражается через I'll close / shut the window."
+                ], 
+                explanation: "Спонтанное решение выражается через I'll close / shut the window." 
             },
-            {
-                block: "Writing & Translation",
-                type: "text",
-                question: "40. Переведите на английский (Past Perfect Continuous): «Она учила английский язык в течение трех часов, когда пришли друзья». (Напишите начало: She had been studying...)",
+            { 
+                block: "Writing & Translation", 
+                type: "text", 
+                question: "40. Переведите на английский (Past Perfect Continuous): «Она учила английский язык в течение трех часов, когда пришли друзья».", 
                 correctAnswers: [
-                    "she had been studying english for three hours when her friends came",
+                    "she had been studying english for three hours when her friends came", 
                     "she had been studying english for three hours when friends arrived",
                     "she had been studying english for three hours when the friends came"
-                ],
-                explanation: "She had been studying English for three hours when..."
+                ], 
+                explanation: "She had been studying English for three hours when..." 
             },
-            {
-                block: "Writing & Translation",
-                type: "text",
-                question: "41. Переведите на английский (Present Perfect): «Я потерял свои ключи, поэтому не могу войти в дом». (Напишите: I've lost...) звено с результатом.",
+            { 
+                block: "Writing & Translation", 
+                type: "text", 
+                question: "41. Переведите на английский (Present Perfect): «Я потерял свои ключи, поэтому не могу войти в дом».", 
                 correctAnswers: [
-                    "i've lost my keys",
-                    "i have lost my keys",
-                    "i've lost my key",
+                    "i've lost my keys", 
+                    "i have lost my keys", 
+                    "i've lost my key", 
                     "i have lost my key"
-                ],
-                explanation: "I've lost my keys."
+                ], 
+                explanation: "I've lost my keys." 
             },
 
-            // --- Блок 7: Speaking / Future Plans & Creative Tasks (Вопросы 42 - 45) ---
-            {
-                block: "Speaking & Future Plans",
-                type: "text",
-                question: "42. Напишите мини-ответ (1 предложение на английском) о своих планах на следующие выходные с использованием конструкции be going to:",
-                correctAnswers: ["any"], // Проверяется на непустой ввод
-                explanation: "Отличный пример: 'Next weekend I am going to visit my grandparents and relax.'"
+            // Блок 7: Speaking / Future Plans & Creative Tasks (42-45)
+            { 
+                block: "Speaking & Future Plans", 
+                type: "text", 
+                question: "42. Напишите мини-предложение на английском о своих планах на выходные с использованием be going to:", 
+                correctAnswers: [
+                    "i am going to visit my grandparents", 
+                    "i'm going to travel next weekend", 
+                    "i am going to relax this weekend",
+                    "i am going to study english"
+                ], 
+                explanation: "Пример: 'I am going to visit my grandparents.'" 
             },
-            {
-                block: "Speaking & Future Plans",
-                type: "text",
-                question: "43. Творческое задание: Опишите свои планы на будущее, используя Future Continuous. Что вы будете делать завтра ровно в 8 вечера? (Напишите предложение)",
-                correctAnswers: ["any"],
-                explanation: "Пример: 'Tomorrow at 8 PM I will be watching my favorite movie.'"
+            { 
+                block: "Speaking & Future Plans", 
+                type: "text", 
+                question: "43. Что вы будете делать завтра ровно в 8 вечера? (Используйте Future Continuous):", 
+                correctAnswers: [
+                    "tomorrow at 8 pm i will be watching a movie", 
+                    "i will be studying at 8 o'clock tomorrow", 
+                    "i will be working at this time tomorrow"
+                ], 
+                explanation: "Пример: 'Tomorrow at 8 PM I will be watching a movie.'" 
             },
-            {
-                block: "Speaking & Future Plans",
-                type: "text",
-                question: "44. Развернутый ответ: Расскажите, какой иностранный язык (кроме английского) вы хотели бы выучить и почему? (Напишите кратко по-английски)",
-                correctAnswers: ["any"],
-                explanation: "Пример: 'I would like to learn Italian because I love its culture and music.'"
+            { 
+                block: "Speaking & Future Plans", 
+                type: "text", 
+                question: "44. Какой иностранный язык вы хотели бы выучить и почему? (Кратко на английском):", 
+                correctAnswers: [
+                    "i would like to learn italian because i love its culture", 
+                    "i want to learn spanish because it is useful", 
+                    "i would like to study german for my career"
+                ], 
+                explanation: "Пример: 'I would like to learn Italian because I love its culture.'" 
             },
-            {
-                block: "Speaking & Future Plans",
-                type: "text",
-                question: "45. Итоговое задание Speaking: Опишите свой идеальный рабочий день в будущем с использованием модального глагола will или конструкций прогноза.",
-                correctAnswers: ["any"],
-                explanation: "Пример: 'In the future, I think I will work remotely and travel all around the world.'"
+            { 
+                block: "Speaking & Future Plans", 
+                type: "text", 
+                question: "45. Опишите свой идеальный рабочий день в будущем (используя will):", 
+                correctAnswers: [
+                    "in the future i think i will work remotely and travel", 
+                    "i will have a flexible schedule and write software", 
+                    "i will work as a developer and manage my time"
+                ], 
+                explanation: "Пример: 'In the future I think I will work remotely and travel.'" 
             }
         ];
 
@@ -728,6 +464,49 @@
         let score = 0;
 
         const appContainer = document.getElementById('quiz-app');
+
+        // Функция нормализации текста (приведение к нижнему регистру, удаление пунктуации и лишних пробелов)
+        function normalizeText(text) {
+            return text
+                .toLowerCase()
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "")
+                .replace(/\s{2,}/g, " ")
+                .trim();
+        }
+
+        // Защищенная функция валидации текстовых ответов (устраняет уязвимость с "asdasd")
+        function validateTextAnswer(questionIndex, rawInput) {
+            const cleanedInput = normalizeText(rawInput);
+
+            // 1. Проверка на длину и бессмысленные символы (защита от "asdasd", "aaaa", пустых строк)
+            if (cleanedInput.length < 4 || /^(.)\1+$/.test(cleanedInput)) {
+                return {
+                    isCorrect: false,
+                    message: "Ошибка: Слишком короткий или бессмысленный ответ. Пожалуйста, введите полноценное предложение на английском."
+                };
+            }
+
+            // 2. Проверка на наличие кириллицы (ответ должен быть на английском)
+            if (/[а-яё]/i.test(rawInput)) {
+                return {
+                    isCorrect: false,
+                    message: "Ошибка: Пожалуйста, введите ответ на английском языке."
+                };
+            }
+
+            const q = questionsData[questionIndex];
+            
+            // 3. Сверка с массивом допустимых вариантов ответа
+            if (q.correctAnswers) {
+                const isMatched = q.correctAnswers.some(ans => normalizeText(ans) === cleanedInput);
+                return {
+                    isCorrect: isMatched,
+                    message: isMatched ? "Верно!" : `Не совсем верно. Правильный вариант: "${q.correctAnswers[0]}".`
+                };
+            }
+
+            return { isCorrect: true, message: "Принято!" };
+        }
 
         function renderQuestion() {
             if (currentQuestionIndex >= questionsData.length) {
@@ -771,23 +550,27 @@
                 const isDisabled = userAnswers[currentQuestionIndex] !== undefined ? 'disabled' : '';
                 html += `
                     <div class="text-input-group">
-                        <input type="text" id="text-answer" placeholder="Введите ваш ответ на английском..." value="${savedVal}" ${isDisabled}>
+                        <input type="text" id="text-input-answer" placeholder="Введите ваш ответ на английском..." value="${savedVal}" ${isDisabled}>
                     </div>
                 `;
             }
 
-            // Обратная связь
+            // Блок обратной связи при ответе
             if (userAnswers[currentQuestionIndex] !== undefined) {
                 let isCorrect = false;
+                let feedbackText = "";
+
                 if (q.type === 'choice') {
                     isCorrect = userAnswers[currentQuestionIndex] === q.answer;
+                    feedbackText = isCorrect ? `Верно! ${q.explanation}` : `Неверно. Правильный вариант: ${q.options[q.answer]}. ${q.explanation}`;
                 } else {
-                    isCorrect = true; // Для творческих заданий / перевода засчитываем ввод
+                    const validationRes = validateTextAnswer(currentQuestionIndex, userAnswers[currentQuestionIndex]);
+                    isCorrect = validationRes.isCorrect;
+                    feedbackText = isCorrect ? `Верно! ${q.explanation}` : `${validationRes.message} ${q.explanation}`;
                 }
                 
                 const fbClass = isCorrect ? 'correct-fb' : 'incorrect-fb';
-                const fbText = isCorrect ? `Верно! ${q.explanation}` : `Не совсем. Правильный ответ: ${q.options ? q.options[q.answer] : ''}. ${q.explanation}`;
-                html += `<div class="feedback show ${fbClass}">${fbText}</div>`;
+                html += `<div class="feedback show ${fbClass}">${feedbackText}</div>`;
             }
 
             html += `
@@ -814,20 +597,32 @@
 
         function submitAnswer() {
             const q = questionsData[currentQuestionIndex];
+            
             if (q.type === 'choice') {
-                // Если не выбрал ничего
                 if (userAnswers[currentQuestionIndex] === undefined) return;
+                userAnswers[currentQuestionIndex] = userAnswers[currentQuestionIndex];
                 if (userAnswers[currentQuestionIndex] === q.answer) {
                     score++;
                 }
-            } else {
-                const inputVal = document.getElementById('text-answer').value.trim();
+            } else if (q.type === 'text') {
+                const inputField = document.getElementById('text-input-answer');
+                const inputVal = inputField.value.trim();
+                
                 if (!inputVal) {
                     alert('Пожалуйста, введите ответ!');
                     return;
                 }
+
+                // Проводим валидацию через защищенную функцию
+                const validationRes = validateTextAnswer(currentQuestionIndex, inputVal);
+                
+                if (!validationRes.isCorrect) {
+                    alert(validationRes.message);
+                    return; // Блокируем отправку при некорректном вводе (например, "asdasd")
+                }
+
                 userAnswers[currentQuestionIndex] = inputVal;
-                score++; // Засчитываем письменный ответ
+                score++; // Засчитываем балл
             }
             renderQuestion();
         }
@@ -848,11 +643,11 @@
             let percentage = Math.round((score / questionsData.length) * 100);
             let message = "";
             if (percentage >= 90) {
-                message = "Великолепный результат! Вы отлично усвоили все грамматические темы из презентаций (Future, Past Continuous, Perfect и др.).";
+                message = "Великолепный результат! Вы отлично усвоили грамматический материал из презентаций.";
             } else if (percentage >= 70) {
-                message = "Хороший уровень знаний! Вы уверенно ориентируетесь в материале, но стоит повторить некоторые сложные правила.";
+                message = "Хороший уровень знаний! Вы уверенно ориентируетесь в темах времен английского языка.";
             } else {
-                message = "Неплохая попытка! Рекомендуем еще раз просмотреть прикрепленные презентации и уделить внимание деталям времен.";
+                message = "Неплохая попытка! Рекомендуем повторить правила по материалам презентаций.";
             }
 
             appContainer.innerHTML = `
@@ -872,7 +667,7 @@
             renderQuestion();
         }
 
-        // Инициализация при загрузке
+        // Первичный запуск квиза
         renderQuestion();
     </script>
 </body>
