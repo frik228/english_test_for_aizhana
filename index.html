@@ -211,6 +211,7 @@
             margin-top: 20px;
             border-top: 1px solid #f0eae1;
             padding-top: 20px;
+            gap: 10px;
         }
 
         .btn {
@@ -218,8 +219,8 @@
             color: white;
             border: none;
             border-radius: 12px;
-            padding: 14px 28px;
-            font-size: 1rem;
+            padding: 14px 22px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -245,6 +246,14 @@
         .btn-secondary:hover {
             background-color: #f3ece4;
             color: var(--text-main);
+        }
+
+        .btn-skip {
+            background-color: #d9c5b2;
+            color: #4a403a;
+        }
+        .btn-skip:hover {
+            background-color: #cbb49d;
         }
 
         .results-container {
@@ -295,6 +304,10 @@
             header h1 {
                 font-size: 1.7rem;
             }
+            .btn {
+                padding: 12px 14px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -302,7 +315,7 @@
 
     <header>
         <h1>English Grammar Master</h1>
-        <p>Интерактивный тренажер: 45 заданий с рандомизированными ответами</p>
+        <p>Интерактивный тренажер: 45 заданий</p>
     </header>
 
     <div class="container" id="quiz-app">
@@ -314,12 +327,11 @@
     </footer>
 
     <script>
-        // База данных из 45 вопросов с правильными ответами, распределенными по случайным индексам (0-3: A, B, C, D)
         const questionsData = [
             // Блок 1: Future Tenses (1-8)
             { block: "Future Tenses", type: "choice", question: "1. Oh, I left the front door wide open! I ... go and shut it right now.", options: ["'ll", "am going to", "shall", "go"], answer: 0, explanation: "Используется 'will ('ll)' для спонтанных решений." },
-            { block: "Future Tenses", type: "choice", question: "2. Look at those heavy black clouds in the sky! It ... rain very soon.", options: ["will", "is going to", "shall", "is raining"], answer: 3, explanation: "При наличии очевидных признаков сейчас используется be going to." },
-            { block: "Future Tenses", type: "choice", question: "3. 'Where shall we have our lunch today?' — 'Let's go to Marino's.' Выберите правильную форму:", options: ["Will we", "Shall we", "Do we", "Are we going to"], answer: 1, explanation: "Shall используется в вопросах для предложений." },
+            { block: "Future Tenses", type: "choice", question: "2. Look at those heavy black clouds in the sky! It ... rain very soon.", options: ["will", "shall", "is raining", "is going to"], answer: 3, explanation: "При наличии очевидных признаков сейчас используется be going to." },
+            { block: "Future Tenses", type: "choice", question: "3. 'Where shall we have our lunch today?' — 'Let's go to Marino's.' Выберите правильную форму:", options: ["Will we", "Do we", "Are we going to", "Shall we"], answer: 3, explanation: "Shall используется в вопросах для предложений." },
             { block: "Future Tenses", type: "choice", question: "4. My flight to Paris ... next Monday at 8:00 AM (по расписанию).", options: ["will leave", "leaves", "is leaving", "is going to leave"], answer: 1, explanation: "Для расписаний и графиков используется Present Simple." },
             { block: "Future Tenses", type: "choice", question: "5. I'm meeting Kate tomorrow morning at 10:30 (договоренность заранее).", options: ["Личная договоренность / запланированный план", "Спонтанное решение", "Прогноз погоды", "Расписание поездов"], answer: 0, explanation: "Present Continuous используется для личных договоренностей." },
             { block: "Future Tenses", type: "choice", question: "6. I hope Kate ... the driving test tomorrow.", options: ["passes", "will pass", "is going to pass", "passed"], answer: 0, explanation: "После глагола hope используется Present Simple." },
@@ -327,7 +339,7 @@
             { block: "Future Tenses", type: "choice", question: "8. Don't phone Amy right now. She ... busy (прогноз на текущий момент).", options: ["will be", "is being", "is", "shall be"], answer: 0, explanation: "Will ('ll) используется для логического предположения о настоящем." },
 
             // Блок 2: Future Continuous & Perfect (9-14)
-            { block: "Future Continuous & Perfect", type: "choice", question: "9. This time next week I ... on a beach, lying under the sun.", options: ["will lie", "will be lying", "will have lain", "am lying"], answer: 1, explanation: "Future Continuous описывает процесс в определенный момент в будущем." },
+            { block: "Future Continuous & Perfect", type: "choice", question: "9. This time next week I ... on a beach, lying under the sun.", options: ["will lie", "will be lying", "will have lain", "am lying"], answer: 3, explanation: "Future Continuous описывает процесс в определенный момент в будущем." },
             { block: "Future Continuous & Perfect", type: "choice", question: "10. Don't phone between 7 and 8 PM. We ... dinner at that time.", options: ["will eat", "will be eating", "eat", "are eating"], answer: 1, explanation: "Действие в процессе в конкретный промежуток будущего времени." },
             { block: "Future Continuous & Perfect", type: "choice", question: "11. Sally always leaves for work at 8:30. At 9:00 she won't be at home — she ... to work.", options: ["will have gone", "will go", "will be going", "goes"], answer: 0, explanation: "Future Perfect показывает завершенность действия к моменту в будущем." },
             { block: "Future Continuous & Perfect", type: "choice", question: "12. Next year Ted and Amy ... married for 25 years.", options: ["will be", "will have been", "have been", "had been"], answer: 1, explanation: "Для длительных состояний к рубежу в будущем используется Future Perfect." },
@@ -370,10 +382,9 @@
                 question: "38. Выполните перевод на английский язык (используя Past Continuous): «Когда зазвонил телефон, мы ужинали».", 
                 correctAnswers: [
                     "we were having dinner when the phone rang", 
-                    "when the phone rang we were having dinner",
                     "we were having dinner when the telephone rang"
                 ], 
-                explanation: "Правильный шаблон: We were having dinner when the phone rang." 
+                explanation: "Поддерживается вариативность порядка частей предложения (можно начать с придаточного времени)." 
             },
             { 
                 block: "Writing & Translation", 
@@ -509,7 +520,30 @@
             
             if (q.correctAnswers) {
                 const normInput = normalizeText(cleanedInput);
-                const isMatched = q.correctAnswers.some(ans => normalizeText(ans) === normInput);
+                const isMatched = q.correctAnswers.some(ans => {
+                    const normAns = normalizeText(ans);
+                    if (normAns === normInput) return true;
+                    
+                    // Универсальная гибкая проверка для ВСЕХ письменных предложений:
+                    // если предложение содержит союзы/маркеры (when, because, while, before, after), 
+                    // проверяем вариант с перестановкой частей местами.
+                    const splitKeywords = ["when", "because", "while", "before", "after"];
+                    for (let kw of splitKeywords) {
+                        if (normAns.includes(kw) && normInput.includes(kw)) {
+                            const partsAns = normAns.split(kw);
+                            const partsInput = normInput.split(kw);
+                            if (partsAns.length === 2 && partsInput.length === 2) {
+                                const matchDirect = (normalizeText(partsAns[0]) === normalizeText(partsInput[0]) && 
+                                                     normalizeText(partsAns[1]) === normalizeText(partsInput[1]));
+                                const matchInverted = (normalizeText(partsAns[0]) === normalizeText(partsInput[1]) && 
+                                                       normalizeText(partsAns[1]) === normalizeText(partsInput[0]));
+                                if (matchDirect || matchInverted) return true;
+                            }
+                        }
+                    }
+                    return false;
+                });
+
                 return {
                     isCorrect: isMatched,
                     message: isMatched ? "Верно!" : "Неверный вариант перевода. Проверьте грамматику и форму времени."
@@ -565,8 +599,8 @@
                 });
                 html += `</div>`;
             } else if (q.type === 'text') {
-                const savedVal = userAnswers[currentQuestionIndex] || '';
-                const isDisabled = userAnswers[currentQuestionIndex] !== undefined ? 'disabled' : '';
+                const savedVal = userAnswers[currentQuestionIndex] === "SKIPPED" ? '' : (userAnswers[currentQuestionIndex] || '');
+                const isDisabled = userAnswers[currentQuestionIndex] !== undefined && userAnswers[currentQuestionIndex] !== "SKIPPED" ? 'disabled' : '';
                 html += `
                     <div class="text-input-group">
                         <input type="text" id="text-input-answer" placeholder="Введите ваш вариант на английском..." value="${savedVal}" ${isDisabled}>
@@ -574,7 +608,7 @@
                 `;
             }
 
-            if (userAnswers[currentQuestionIndex] !== undefined) {
+            if (userAnswers[currentQuestionIndex] !== undefined && userAnswers[currentQuestionIndex] !== "SKIPPED") {
                 let isCorrect = false;
                 let feedbackText = "";
 
@@ -595,9 +629,10 @@
                 </div>
                 <div class="nav-buttons">
                     <button class="btn btn-secondary" onclick="prevQuestion()" ${currentQuestionIndex === 0 ? 'disabled' : ''}>Назад</button>
+                    <button class="btn btn-skip" onclick="skipQuestion()">Пропустить</button>
             `;
 
-            if (userAnswers[currentQuestionIndex] === undefined) {
+            if (userAnswers[currentQuestionIndex] === undefined || userAnswers[currentQuestionIndex] === "SKIPPED") {
                 html += `<button class="btn" onclick="submitAnswer()">Проверить</button>`;
             } else {
                 html += `<button class="btn" onclick="nextQuestion()">${currentQuestionIndex === questionsData.length - 1 ? 'Узнать результат' : 'Далее'}</button>`;
@@ -641,6 +676,11 @@
                 score++;
             }
             renderQuestion();
+        }
+
+        function skipQuestion() {
+            userAnswers[currentQuestionIndex] = "SKIPPED";
+            nextQuestion();
         }
 
         function nextQuestion() {
