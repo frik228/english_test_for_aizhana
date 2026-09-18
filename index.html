@@ -302,11 +302,11 @@
 
     <header>
         <h1>English Grammar Master</h1>
-        <p>Интерактивный тренажер: 45 продвинутых заданий с защищенной валидацией</p>
+        <p>Интерактивный тренажер: 45 заданий с интеллектуальной защитой от обхода</p>
     </header>
 
     <div class="container" id="quiz-app">
-        <!-- Контент квиза генерируется динамически -->
+        <!-- Динамический контент квиза -->
     </div>
 
     <footer>
@@ -314,16 +314,16 @@
     </footer>
 
     <script>
-        // База данных из 45 вопросов (включая текстовые с эталонами валидации)
+        // База данных из 45 вопросов без подсказок в текстах
         const questionsData = [
             // Блок 1: Future Tenses (1-8)
-            { block: "Future Tenses", type: "choice", question: "1. Oh, I left the front door wide open! I ... go and shut it right now.", options: ["'ll", "am going to", "shall", "go"], answer: 0, explanation: "Мы используем 'will ('ll)' для спонтанных решений." },
-            { block: "Future Tenses", type: "choice", question: "2. Look at those heavy black clouds in the sky! It ... rain very soon.", options: ["will", "is going to", "shall", "is raining"], answer: 1, explanation: "Когда ситуация сейчас явно указывает на будущее, используется be going to." },
-            { block: "Future Tenses", type: "choice", question: "3. 'Where shall we have our lunch today?' — 'Let's go to Marino's.' Выберите правильную форму:", options: ["Will we", "Shall we", "Do we", "Are we going to"], answer: 1, explanation: "Shall используется в вопросах для предложений и советов." },
+            { block: "Future Tenses", type: "choice", question: "1. Oh, I left the front door wide open! I ... go and shut it right now.", options: ["'ll", "am going to", "shall", "go"], answer: 0, explanation: "Используется 'will ('ll)' для спонтанных решений." },
+            { block: "Future Tenses", type: "choice", question: "2. Look at those heavy black clouds in the sky! It ... rain very soon.", options: ["will", "is going to", "shall", "is raining"], answer: 1, explanation: "При наличии очевидных признаков сейчас используется be going to." },
+            { block: "Future Tenses", type: "choice", question: "3. 'Where shall we have our lunch today?' — 'Let's go to Marino's.' Выберите правильную форму:", options: ["Will we", "Shall we", "Do we", "Are we going to"], answer: 1, explanation: "Shall используется в вопросах для предложений." },
             { block: "Future Tenses", type: "choice", question: "4. My flight to Paris ... next Monday at 8:00 AM (по расписанию).", options: ["will leave", "is leaving", "leaves", "is going to leave"], answer: 2, explanation: "Для расписаний и графиков используется Present Simple." },
             { block: "Future Tenses", type: "choice", question: "5. I'm meeting Kate tomorrow morning at 10:30 (договоренность заранее).", options: ["Спонтанное решение", "Личная договоренность / запланированный план", "Прогноз погоды", "Расписание поездов"], answer: 1, explanation: "Present Continuous используется для личных договоренностей." },
-            { block: "Future Tenses", type: "choice", question: "6. I hope Kate ... the driving test tomorrow.", options: ["passes", "will pass", "is going to pass", "passed"], answer: 0, explanation: "После глагола hope мы используем Present Simple." },
-            { block: "Future Tenses", type: "choice", question: "7. The car ... start. (= машина «отказывается» заводиться).", options: ["won't", "shan't", "doesn't", "isn't going to"], answer: 0, explanation: "Won't выражает отказ механизма или объекта." },
+            { block: "Future Tenses", type: "choice", question: "6. I hope Kate ... the driving test tomorrow.", options: ["passes", "will pass", "is going to pass", "passed"], answer: 0, explanation: "После глагола hope используется Present Simple." },
+            { block: "Future Tenses", type: "choice", question: "7. The car ... start. (= машина «отказывается» заводиться).", options: ["won't", "shan't", "doesn't", "isn't going to"], answer: 0, explanation: "Won't выражает отказ механизма." },
             { block: "Future Tenses", type: "choice", question: "8. Don't phone Amy right now. She ... busy (прогноз на текущий момент).", options: ["will be", "is being", "is", "shall be"], answer: 0, explanation: "Will ('ll) используется для логического предположения о настоящем." },
 
             // Блок 2: Future Continuous & Perfect (9-14)
@@ -332,14 +332,14 @@
             { block: "Future Continuous & Perfect", type: "choice", question: "11. Sally always leaves for work at 8:30. At 9:00 she won't be at home — she ... to work.", options: ["will go", "will be going", "will have gone", "goes"], answer: 2, explanation: "Future Perfect показывает завершенность действия к моменту в будущем." },
             { block: "Future Continuous & Perfect", type: "choice", question: "12. Next year Ted and Amy ... married for 25 years.", options: ["will be", "will have been", "have been", "had been"], answer: 1, explanation: "Для длительных состояний к рубежу в будущем используется Future Perfect." },
             { block: "Future Continuous & Perfect", type: "choice", question: "13. By the time we arrive at the cinema, the film already ...", options: ["will start", "will be starting", "will have started", "starts"], answer: 2, explanation: "Future Perfect употребляется с by the time для завершенных к сроку действий." },
-            { block: "Future Continuous & Perfect", type: "choice", question: "14. 'Later in the programme, I ... talking to the Minister of Education.'", options: ["will be", "will", "am going to", "shall"], answer: 0, explanation: "Will be -ing часто используется ведущими для анонса пунктов программы." },
+            { block: "Future Continuous & Perfect", type: "choice", question: "14. 'Later in the programme, I ... talking to the Minister of Education.'", options: ["will be", "will", "am going to", "shall"], answer: 0, explanation: "Will be -ing используется для анонса пунктов программы." },
 
             // Блок 3: Past Continuous (15-22)
             { block: "Past Continuous", type: "choice", question: "15. Yesterday at 10:30 AM, Karen and Joe ... tennis.", options: ["played", "were playing", "was playing", "had played"], answer: 1, explanation: "Past Continuous — процесс в определенный момент прошлого." },
             { block: "Past Continuous", type: "choice", question: "16. Выберите правильное отрицание в Past Continuous для множественного числа:", options: ["they weren't working", "they didn't working", "they hadn't working", "they weren't worked"], answer: 0, explanation: "Формула: weren't + V-ing." },
             { block: "Past Continuous", type: "choice", question: "17. What ... you ... at 10 o'clock last night?", options: ["did / do", "were / doing", "was / doing", "had / done"], answer: 1, explanation: "Вопрос в Past Continuous: Were + подлежащее + V-ing." },
             { block: "Past Continuous", type: "choice", question: "18. 'We were walking home when I met Dan' означает:", options: ["Путь полностью завершен", "Процесс ходьбы прерван кратким действием", "Дэн шел с нами", "Ошибка в грамматике"], answer: 1, explanation: "Фоновый процесс прерывается коротким действием в Past Simple." },
-            { block: "Past Continuous", type: "choice", question: "19. Какой глагол НЕЛЬЗЯ использовать в Continuous?", options: ["study", "know", "run", "play"], answer: 1, explanation: "Know — стативный глагол (состояния), не используется в Continuous." },
+            { block: "Past Continuous", type: "choice", question: "19. Какой глагол НЕЛЬЗЯ использовать в Continuous?", options: ["study", "know", "run", "play"], answer: 1, explanation: "Know — стативный глагол, не используется в Continuous." },
             { block: "Past Continuous", type: "choice", question: "20. Matt phoned while we ... dinner.", options: ["had", "were having", "had been having", "have had"], answer: 1, explanation: "Звонок (Past Simple) прервал процесс ужина (Past Continuous)." },
             { block: "Past Continuous", type: "choice", question: "21. 'We ... home after the party last night.' (Завершенный путь до конца)", options: ["were walking", "walked", "had walked", "walk"], answer: 1, explanation: "Полное завершенное действие выражается через Past Simple." },
             { block: "Past Continuous", type: "choice", question: "22. I waved to Helen, but she ... looking.", options: ["wasn't", "weren't", "didn't", "hadn't"], answer: 0, explanation: "С местоимением she в Past Continuous отрицание — wasn't." },
@@ -363,11 +363,11 @@
             { block: "Present Perfect & Continuous", type: "choice", question: "36. We ... waiting for the bus for over an hour now!", options: ["have been", "had been", "are", "were"], answer: 0, explanation: "Действие с прошлого продолжается сейчас — Present Perfect Continuous." },
             { block: "Present Perfect & Continuous", type: "choice", question: "37. How long ... you ... English?", options: ["do / learn", "have / been learning", "did / learn", "are / learning"], answer: 1, explanation: "Вопрос о непрекращающемся процессе длительности." },
 
-            // Блок 6: Writing / Translation (Письменный перевод) (38-41)
+            // Блок 6: Writing / Translation (Письменный перевод) (38-41) — Подсказки полностью убраны!
             { 
                 block: "Writing & Translation", 
                 type: "text", 
-                question: "38. Переведите на английский (Past Continuous): «Когда зазвонил телефон, мы ужинали».", 
+                question: "38. Выполните перевод на английский язык (используя Past Continuous): «Когда зазвонил телефон, мы ужинали».", 
                 correctAnswers: [
                     "we were having dinner when the phone rang", 
                     "when the phone rang we were having dinner",
@@ -378,7 +378,7 @@
             { 
                 block: "Writing & Translation", 
                 type: "text", 
-                question: "39. Переведите на английский (Future Simple / Спонтанное решение): «Здесь так холодно. Я закрою окно».", 
+                question: "39. Выполните перевод на английский язык (выражение спонтанного решения): «Здесь так холодно. Я закрою окно».", 
                 correctAnswers: [
                     "i'll close the window", 
                     "i will close the window", 
@@ -390,7 +390,7 @@
             { 
                 block: "Writing & Translation", 
                 type: "text", 
-                question: "40. Переведите на английский (Past Perfect Continuous): «Она учила английский язык в течение трех часов, когда пришли друзья».", 
+                question: "40. Выполните перевод на английский язык (используя Past Perfect Continuous): «Она учила английский язык в течение трех часов, когда пришли друзья».", 
                 correctAnswers: [
                     "she had been studying english for three hours when her friends came", 
                     "she had been studying english for three hours when friends arrived",
@@ -401,7 +401,7 @@
             { 
                 block: "Writing & Translation", 
                 type: "text", 
-                question: "41. Переведите на английский (Present Perfect): «Я потерял свои ключи, поэтому не могу войти в дом».", 
+                question: "41. Выполните перевод на английский язык (используя Present Perfect с результатом в настоящем): «Я потерял свои ключи, поэтому не могу войти в дом».", 
                 correctAnswers: [
                     "i've lost my keys", 
                     "i have lost my keys", 
@@ -415,7 +415,7 @@
             { 
                 block: "Speaking & Future Plans", 
                 type: "text", 
-                question: "42. Напишите мини-предложение на английском о своих планах на выходные с использованием be going to:", 
+                question: "42. Напишите полноценное предложение на английском о своих планах на выходные с использованием be going to:", 
                 correctAnswers: [
                     "i am going to visit my grandparents", 
                     "i'm going to travel next weekend", 
@@ -427,7 +427,7 @@
             { 
                 block: "Speaking & Future Plans", 
                 type: "text", 
-                question: "43. Что вы будете делать завтра ровно в 8 вечера? (Используйте Future Continuous):", 
+                question: "43. Опишите с помощью Future Continuous, что вы будете делать завтра ровно в 8 вечера:", 
                 correctAnswers: [
                     "tomorrow at 8 pm i will be watching a movie", 
                     "i will be studying at 8 o'clock tomorrow", 
@@ -438,7 +438,7 @@
             { 
                 block: "Speaking & Future Plans", 
                 type: "text", 
-                question: "44. Какой иностранный язык вы хотели бы выучить и почему? (Кратко на английском):", 
+                question: "44. Какой иностранный язык вы хотели бы выучить и почему? Дайте развернутый ответ на английском:", 
                 correctAnswers: [
                     "i would like to learn italian because i love its culture", 
                     "i want to learn spanish because it is useful", 
@@ -465,7 +465,7 @@
 
         const appContainer = document.getElementById('quiz-app');
 
-        // Функция нормализации текста (приведение к нижнему регистру, удаление пунктуации и лишних пробелов)
+        // Функция нормализации текста (приведение к нижнему регистру, удаление знаков препинания и лишних пробелов)
         function normalizeText(text) {
             return text
                 .toLowerCase()
@@ -474,34 +474,61 @@
                 .trim();
         }
 
-        // Защищенная функция валидации текстовых ответов (устраняет уязвимость с "asdasd")
+        // Интеллектуальная защищенная валидация текстовых ответов
         function validateTextAnswer(questionIndex, rawInput) {
-            const cleanedInput = normalizeText(rawInput);
+            const cleanedInput = rawInput.trim();
 
-            // 1. Проверка на длину и бессмысленные символы (защита от "asdasd", "aaaa", пустых строк)
-            if (cleanedInput.length < 4 || /^(.)\1+$/.test(cleanedInput)) {
+            // 1. Проверка на минимальную длину (не менее 5 символов)
+            if (cleanedInput.length < 5) {
                 return {
                     isCorrect: false,
-                    message: "Ошибка: Слишком короткий или бессмысленный ответ. Пожалуйста, введите полноценное предложение на английском."
+                    message: "Ошибка: Слишком короткий ответ. Введите осмысленное предложение."
                 };
             }
 
-            // 2. Проверка на наличие кириллицы (ответ должен быть на английском)
+            // 2. Защита от спама и рандома (абьюза вроде "asdasd", "aaaaa", "11111")
+            const alphaOnly = cleanedInput.toLowerCase().replace(/[^a-z]/g, '');
+            if (/^(.)\1+$/.test(alphaOnly) || /(..)\1{2,}/.test(alphaOnly)) {
+                return {
+                    isCorrect: false,
+                    message: "Ошибка: Обнаружен бессмысленный набор символов (спам/рандом)."
+                };
+            }
+
+            // 3. Проверка на наличие кириллицы (ответ должен быть на английском)
             if (/[а-яё]/i.test(rawInput)) {
                 return {
                     isCorrect: false,
-                    message: "Ошибка: Пожалуйста, введите ответ на английском языке."
+                    message: "Ошибка: Пожалуйста, пишите ответ на английском языке."
+                };
+            }
+
+            // 4. Проверка наличия структуры (предложение должно содержать пробелы, то есть несколько слов)
+            if (!cleanedInput.includes(' ') && questionIndex < 42) {
+                return {
+                    isCorrect: false,
+                    message: "Ошибка: Введите предложение целиком, используя пробелы."
                 };
             }
 
             const q = questionsData[questionIndex];
             
-            // 3. Сверка с массивом допустимых вариантов ответа
+            // 5. Токенизированное сравнение с базой допустимых ответов
             if (q.correctAnswers) {
-                const isMatched = q.correctAnswers.some(ans => normalizeText(ans) === cleanedInput);
+                const normInput = normalizeText(cleanedInput);
+                const isMatched = q.correctAnswers.some(ans => normalizeText(ans) === normInput);
                 return {
                     isCorrect: isMatched,
-                    message: isMatched ? "Верно!" : `Не совсем верно. Правильный вариант: "${q.correctAnswers[0]}".`
+                    message: isMatched ? "Верно!" : "Неверный вариант перевода. Проверьте грамматику и форму времени."
+                };
+            }
+
+            // Для открытых творческих вопросов (42-45) проверяем минимальную структуру (минимум 3 слова)
+            const words = cleanedInput.split(/\s+/);
+            if (words.length < 3) {
+                return {
+                    isCorrect: false,
+                    message: "Ошибка: Дайте более развернутый ответ (минимум 3 слова)."
                 };
             }
 
@@ -550,12 +577,12 @@
                 const isDisabled = userAnswers[currentQuestionIndex] !== undefined ? 'disabled' : '';
                 html += `
                     <div class="text-input-group">
-                        <input type="text" id="text-input-answer" placeholder="Введите ваш ответ на английском..." value="${savedVal}" ${isDisabled}>
+                        <input type="text" id="text-input-answer" placeholder="Введите ваш вариант на английском..." value="${savedVal}" ${isDisabled}>
                     </div>
                 `;
             }
 
-            // Блок обратной связи при ответе
+            // Блок обратной связи
             if (userAnswers[currentQuestionIndex] !== undefined) {
                 let isCorrect = false;
                 let feedbackText = "";
@@ -600,7 +627,6 @@
             
             if (q.type === 'choice') {
                 if (userAnswers[currentQuestionIndex] === undefined) return;
-                userAnswers[currentQuestionIndex] = userAnswers[currentQuestionIndex];
                 if (userAnswers[currentQuestionIndex] === q.answer) {
                     score++;
                 }
@@ -613,12 +639,12 @@
                     return;
                 }
 
-                // Проводим валидацию через защищенную функцию
+                // Запуск интеллектуальной проверки
                 const validationRes = validateTextAnswer(currentQuestionIndex, inputVal);
                 
                 if (!validationRes.isCorrect) {
                     alert(validationRes.message);
-                    return; // Блокируем отправку при некорректном вводе (например, "asdasd")
+                    return; // Блокируем прохождение дальше, если ответ не прошел защиту
                 }
 
                 userAnswers[currentQuestionIndex] = inputVal;
@@ -667,7 +693,7 @@
             renderQuestion();
         }
 
-        // Первичный запуск квиза
+        // Запуск при загрузке
         renderQuestion();
     </script>
 </body>
